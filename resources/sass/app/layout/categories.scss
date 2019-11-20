@@ -1,0 +1,22 @@
+.categories {
+  margin-bottom: -$grid-gutter-width * 1.5;
+}
+
+.category {
+  display: block;
+  position: relative;
+  margin-bottom: $grid-gutter-width * 1.5;
+
+  &__image {
+    padding-top: 67%;
+    background-position: 50% 50%;
+    background-size: cover;
+    transition: 1s ease;
+  }
+
+  &:hover {
+    .category__image {
+      transform: scale(1.05);
+    }
+  }
+}
