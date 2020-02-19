@@ -4,6 +4,7 @@
 
     @includeWhen(isset($slides) && $slides->count(), 'partials.app.home.slider')
     @includeWhen($categories->count(), 'partials.app.home.categories')
+    @include('partials.app.home.about')
     @includeWhen($articles->count(), 'partials.app.home.articles')
 
 @endsection

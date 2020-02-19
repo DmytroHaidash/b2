@@ -14,6 +14,7 @@ return [
 
     'about' => [
         'title' => 'О нас',
+        'button' => 'Подробнее'
     ],
 
     'contacts' => [

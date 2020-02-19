@@ -13,6 +13,7 @@ return [
     ],
     'about' => [
         'title' => 'Про нас',
+        'button' => 'Детальніше'
     ],
     'contacts' => [
         'title' => 'Контакти',

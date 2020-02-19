@@ -1,13 +1,17 @@
-<section id="articles" class="mt-0">
-    <figure class="tabs-image d-none d-md-block lozad"
-            data-background-image="{{ $articles->first()->banner }}"></figure>
-    <div class="container">
+<section id="articles" class="mt-4">
+    <a href="{{  route('app.articles.index') }}"
+       class="appointment d-flex flex-column align-items-center justify-content-center"
+       style="background-image: url(../images/about.jpg)">
+        <h2 class="appointment__title">@lang('pages.articles.title')</h2>
+    </a>
+    {{-- <figure class="tabs-image d-none d-md-block lozad"
+             data-background-image="{{ $articles->first()->banner }}"></figure>--}}
+    <div class="container mt-4">
         <div class="row">
-            <div class="col-md-6 col-lg-4 ml-auto">
-                <h2 class="h3">@lang('pages.articles.title')</h2>
+            @foreach($articles as $article)
+                <div class="col-md-6 col-lg-4 ">
 
-                @foreach($articles as $article)
-                    <article class="tabs-item py-4 {{ $loop->index == 0 ? 'is-active' : '' }}"
+                    <article class=" py-4 {{ $loop->index == 0 ? 'is-active' : '' }}"
                              tabindex="{{ $loop->iteration }}" data-image="{{ $article->banner }}">
                         <h5 class="mb-2">{{ $article->translate('title') }}</h5>
                         <div class="tabs-item__description mb-1">{{ remove_tags($article->translate('body')) }}</div>
@@ -15,15 +19,14 @@
                             @lang('pages.articles.readmore')
                         </a>
                     </article>
-                @endforeach
-
-                <div class="mt-2">
-                    <a href="{{ route('app.articles.index') }}" class="btn btn-primary h4 px-4 py-3 mb-0">
-                        <i class="material-icons mr-2">assignment</i>
-                        @lang('pages.home.articles.button')
-                    </a>
                 </div>
-            </div>
+            @endforeach
+        </div>
+        <div class="mt-2 text-center">
+            <a href="{{ route('app.articles.index') }}" class="btn btn-primary h4 px-4 py-3 mb-0">
+                <i class="material-icons mr-2">assignment</i>
+                @lang('pages.home.articles.button')
+            </a>
         </div>
     </div>
 </section>
