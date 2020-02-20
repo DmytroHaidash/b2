@@ -41622,13 +41622,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 (function () {
-  var searchButton = document.querySelector('[data-search]');
+  var searchButton = document.querySelectorAll('[data-search]');
   var searchForm = document.querySelector('.nav .search');
-  searchButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    var icon = searchButton.innerText === 'search' ? 'close' : 'search';
-    searchButton.innerText = icon;
-    searchForm.classList.toggle('is-visible');
+  searchButton.forEach(function (item) {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
+      var icon = item.innerText === 'search' ? 'close' : 'search';
+      item.innerText = icon;
+      searchForm.classList.toggle('is-visible');
+    });
   });
 })();
 

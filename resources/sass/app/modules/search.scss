@@ -1,6 +1,11 @@
 .search {
-  position: relative;
+  position: fixed !important;
+  top: 0 !important;
   z-index: 600;
+
+  @media (min-width: map_get($grid-breakpoints, lg)) {
+    position: absolute !important;
+  }
 
   .material-icons {
     position: absolute;
@@ -40,6 +45,7 @@
 
     &.is-visible {
       transform: scale(1);
+      width: 100%;
     }
 
     .form-control {

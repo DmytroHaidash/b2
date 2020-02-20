@@ -16,7 +16,9 @@ return [
         'title' => 'О нас',
         'button' => 'Подробнее'
     ],
-
+    'payment-and-delivery'=> [
+        'title' => 'Оплата и доставка'
+    ],
     'contacts' => [
         'title' => 'Контакты',
     ],

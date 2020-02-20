@@ -8,6 +8,29 @@
     height: 75px;
   }
 
+  .nav-search-icon {
+    position: relative;
+    z-index: 800;
+  }
+
+  .container-fluid--header {
+    max-width: 100%;
+    padding-left: $grid-gutter-width;
+  }
+
+  .navbar {
+    background-color: transparent !important;
+    width: 100%;
+
+    .menu {
+      background-color: $primary;
+    }
+  }
+
+  .nav-link {
+    padding: 0 0.5rem !important;
+  }
+
   &.is-light {
     a {
       color: #fff;

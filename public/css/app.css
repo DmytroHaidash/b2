@@ -12360,6 +12360,29 @@ img {
   }
 }
 
+#app-header .nav-search-icon {
+  position: relative;
+  z-index: 800;
+}
+
+#app-header .container-fluid--header {
+  max-width: 100%;
+  padding-left: 1.25rem;
+}
+
+#app-header .navbar {
+  background-color: transparent !important;
+  width: 100%;
+}
+
+#app-header .navbar .menu {
+  background-color: #333;
+}
+
+#app-header .nav-link {
+  padding: 0 0.5rem !important;
+}
+
 #app-header.is-light a {
   color: #fff;
 }
@@ -12725,6 +12748,8 @@ img {
 
 .category--large {
   padding-top: 67%;
+  height: 50%;
+  width: 100%;
 }
 
 .category--medium {
@@ -12734,6 +12759,7 @@ img {
 }
 
 .category--small {
+  padding-top: 50%;
   height: 50%;
   width: 100%;
 }
@@ -13006,8 +13032,15 @@ img {
 }
 
 .search {
-  position: relative;
+  position: fixed !important;
+  top: 0 !important;
   z-index: 600;
+}
+
+@media (min-width: 992px) {
+  .search {
+    position: absolute !important;
+  }
 }
 
 .search .material-icons {
@@ -13054,6 +13087,7 @@ img {
 .nav .search.is-visible {
   -webkit-transform: scale(1);
           transform: scale(1);
+  width: 100%;
 }
 
 .nav .search .form-control {

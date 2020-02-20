@@ -1,11 +1,13 @@
 (function () {
-  const searchButton = document.querySelector('[data-search]');
+  const searchButton = document.querySelectorAll('[data-search]');
   const searchForm = document.querySelector('.nav .search');
 
-  searchButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    let icon = searchButton.innerText === 'search' ? 'close' : 'search';
-    searchButton.innerText = icon;
-    searchForm.classList.toggle('is-visible');
-  })
+  searchButton.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      let icon = item.innerText === 'search' ? 'close' : 'search';
+      item.innerText = icon;
+      searchForm.classList.toggle('is-visible');
+    })
+  });
 })();

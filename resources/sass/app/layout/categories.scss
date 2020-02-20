@@ -8,6 +8,8 @@
 	border: 5px solid #1d2024;
 	&--large {
 		padding-top: 67%;
+		height: 50%;
+		width: 100%;
 
 	}
 	&--medium{
@@ -17,6 +19,7 @@
 	}
 
 	&--small {
+		padding-top: 50%;
 		height: 50%;
 		width: 100%;
 	}

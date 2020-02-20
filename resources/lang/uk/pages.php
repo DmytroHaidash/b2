@@ -18,6 +18,9 @@ return [
     'contacts' => [
         'title' => 'Контакти',
     ],
+    'payment-and-delivery'=> [
+        'title' => 'Оплата і доставка'
+    ],
     'terms-and-conditions' => [
         'title' => 'Умови використання',
     ],
