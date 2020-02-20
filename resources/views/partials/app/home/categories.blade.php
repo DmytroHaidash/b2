@@ -1,9 +1,9 @@
-<section id="categories">
+<section id="categories ">
     <div class="container-fluid">
-        <h2 class="h1 text-center mb-5">
+ {{--       <h2 class="h1 text-center mb-5">
             @lang('pages.home.categories.title')
         </h2>
-
+--}}
         <div class="row no-gutters categories">
             @foreach($categories as $category)
                 @if($loop->first)
