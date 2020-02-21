@@ -12,6 +12,9 @@
     background-size: cover;
     transition: 1s ease;
     position: relative;
+    &-home{
+      padding-top: 100%;
+    }
   }
 
   &__info {

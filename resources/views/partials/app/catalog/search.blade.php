@@ -1,4 +1,4 @@
-<form action="{{ route('app.catalog.index') }}" class="my-5 search">
+<form action="{{ route('app.catalog.index') }}" class="my-5">
     <div class="d-flex position-relative">
         <svg width="24" height="24" class="fill-current">
             <use xlink:href="#search"></use>

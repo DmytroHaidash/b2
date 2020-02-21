@@ -8,7 +8,7 @@
                     {{--</svg>--}}
                     {{--<br>--}}
                     <svg width="160" height="160">
-                        <use xlink:href="#logo"></use>
+                        <use xlink:href="#logo" fill="#fff"></use>
                     </svg>
                 </a>
             </div>

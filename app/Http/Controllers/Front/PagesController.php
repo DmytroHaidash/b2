@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Models\Additional\Page;
 use App\Models\Article\Article;
 use App\Models\Catalog\Category;
+use App\Models\Catalog\Product;
 use App\Models\Slider\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,8 @@ class PagesController extends Controller
         $slides = optional(Slider::find(1))->slides;
         $categories = Category::has('products')->inRandomOrder()->take(5)->get();
         $about = Page::where('slug', 'about')->first();
-        return \view('app.pages.home', compact('articles', 'slides', 'categories', 'about'));
+        $popular = Product::orderByDesc('views_count')->take(4)->get();
+        return \view('app.pages.home', compact('articles', 'slides', 'categories', 'about', 'popular'));
     }
 
     public function show(Page $page): View
