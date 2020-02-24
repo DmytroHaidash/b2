@@ -1,5 +1,6 @@
 <header id="app-header">
-    <div class="container-fluid d-flex justify-content-between align-items-center p-0 pl-lg-4">
+    <i
+  class="container-fluid d-flex justify-content-between align-items-center p-0 pl-lg-4">
         <div class="header-item d-flex align-items-center">
             <div class="logo position-relative">
                 <a href="{{ url('/') }}"
@@ -23,17 +24,21 @@
                 <li class="login-list-item">
                     @auth
                         @if (!auth()->user()->hasRole('admin'))
+                            <div class="d-md-flex pr-xl-3">
                         <li class="login-list-item">
                             <a href="{{ route('app.profile.index') }}" class="login-list-item__link">
                                 @lang('profile.title')
                             </a>
                         </li>
+                        </div>
                         @else
+                        <div class="d-md-flex pr-xl-3">
                         <li class="login-list-item">
                             <a href="{{ route('admin.home') }}" class="login-list-item__link">
                                 @lang('navigation.header.dashboard')
                             </a>
                         </li>
+                        </div>
                         @endif
                     @else
                         <div class="d-md-flex pr-xl-3">
