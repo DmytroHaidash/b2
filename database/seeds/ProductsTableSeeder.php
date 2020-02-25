@@ -53,11 +53,11 @@ class ProductsTableSeeder extends Seeder
 
 			$product->categories()->attach(\App\Models\Catalog\Category::inRandomOrder()->take(rand(3, 6))->pluck('id')->all());
 
-			$product->clearMediaCollection('products');
+			/*$product->clearMediaCollection('products');
 			for ($img = rand(2, 4); $img; $img--) {
 				$product->addMediaFromUrl($faker->imageUrl(1920, 1080))
 						->toMediaCollection('products');
-			}
+			}*/
 		}
 	}
 }
