@@ -32,7 +32,7 @@ class CategoriesTableSeeder extends Seeder
 				]);
 			});
 
-			$category->addMediaFromUrl($faker->imageUrl(1280, 768))->toMediaCollection('category');
+			/*$category->addMediaFromUrl($faker->imageUrl(1280, 768))->toMediaCollection('category');*/
 		}
     }
 }
