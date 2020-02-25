@@ -1,5 +1,5 @@
 <header id="app-header">
-    <i
+    <div
   class="container-fluid d-flex justify-content-between align-items-center p-0 pl-lg-4">
         <div class="header-item d-flex align-items-center">
             <div class="logo position-relative">
