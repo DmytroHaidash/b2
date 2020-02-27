@@ -7,6 +7,7 @@ use App\Mail\AskQuestion;
 use App\Models\Additional\Page;
 use App\Models\Catalog\Category;
 use App\Models\Catalog\Product;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -125,6 +126,14 @@ class CatalogController extends Controller
 
 		return redirect()->route('app.thanks');
 	}
+
+	public function pdf(Product $product)
+    {
+        $images = $product->getMedia('uploads');
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('pdf.pdf', compact('product', 'images'));
+        return $pdf->download($product->title . '.pdf');
+    }
 
 	/**
 	 * @param Request $request

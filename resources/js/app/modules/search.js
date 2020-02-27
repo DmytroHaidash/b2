@@ -1,6 +1,6 @@
 (function () {
   const searchButton = document.querySelectorAll('[data-search]');
-  const searchForm = document.querySelector('.nav .search');
+  const searchForm = document.querySelector('.search');
 
   searchButton.forEach(item => {
     item.addEventListener('click', (e) => {
