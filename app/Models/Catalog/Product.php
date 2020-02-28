@@ -60,6 +60,10 @@ class Product extends Model implements HasMedia, Sortable
         return $this->hasMany(Order::class);
     }
 
+    public function accountings():HasMany
+    {
+        return $this->hasMany(Accounting::class);
+    }
     /**
      * @return MorphMany
      */

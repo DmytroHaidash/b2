@@ -105,6 +105,8 @@
                     </div>
                 </div>
             </div>
+            <h2>Бухгалтерия</h2>
+            <accountings :data="{{$product->accountings->count() > 0 ? json_encode($product->accountings) : '[]' }}"></accountings>
         </form>
     </section>
 

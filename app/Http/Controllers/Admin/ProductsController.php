@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductSavingRequest;
+use App\Models\Catalog\Accounting;
 use App\Models\Catalog\Category;
 use App\Models\Catalog\Product;
 use Exception;
@@ -104,6 +105,7 @@ class ProductsController extends Controller
      */
     public function update(ProductSavingRequest $request, Product $product): RedirectResponse
     {
+        dd($request->all());
         if ($request->has('regenerate')) {
             $product->slug = null;
         }
@@ -160,5 +162,16 @@ class ProductsController extends Controller
         $product->save();
 
         return back();
+    }
+
+    /**
+     * @param Accounting $accounting
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroyAccounting(Accounting $accounting)
+    {
+        $accounting->delete();
+        return \response(null, 204);
     }
 }
