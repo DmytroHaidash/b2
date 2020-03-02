@@ -138,7 +138,13 @@ class ProductsController extends Controller
         {
             foreach ($request->accountings as $accounting)
             {
-                $product->accountings()->create($accounting);
+                if($accounting['id'])
+                {
+                    $product->accountings()->where('id', $accounting['id'])->update($accounting);
+                }else{
+                    $product->accountings()->create($accounting);
+                }
+
             }
         }
         return redirect()->route('admin.products.edit', $product);

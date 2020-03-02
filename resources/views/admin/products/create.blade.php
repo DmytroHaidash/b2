@@ -91,7 +91,7 @@
                     <label class="custom-control-label" for="published">Опубликовать</label>
                 </div>
             </div>
-            <h2>Бухгалтерия</h2>
+            <h2 class="mt-4">Бухгалтерия</h2>
             <accountings :data="[]"></accountings>
         </form>
     </section>
