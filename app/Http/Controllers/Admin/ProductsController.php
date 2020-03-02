@@ -83,6 +83,13 @@ class ProductsController extends Controller
             Media::setNewOrder($request->input('media'));
         }
 
+        if($request->has('accountings'))
+        {
+            foreach ($request->accountings as $accounting)
+            {
+                $product->accountings()->create($accounting);
+            }
+        }
         return redirect()->route('admin.products.edit', $product);
     }
 
@@ -105,7 +112,6 @@ class ProductsController extends Controller
      */
     public function update(ProductSavingRequest $request, Product $product): RedirectResponse
     {
-        dd($request->all());
         if ($request->has('regenerate')) {
             $product->slug = null;
         }
@@ -128,6 +134,13 @@ class ProductsController extends Controller
             Media::setNewOrder($request->input('media'));
         }
 
+        if($request->has('accountings'))
+        {
+            foreach ($request->accountings as $accounting)
+            {
+                $product->accountings()->create($accounting);
+            }
+        }
         return redirect()->route('admin.products.edit', $product);
     }
 
