@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use function MongoDB\BSON\toJSON;
 use function redirect;
 use Spatie\MediaLibrary\Models\Media;
 
@@ -64,6 +65,8 @@ class ProductsController extends Controller
      */
     public function store(ProductSavingRequest $request): RedirectResponse
     {
+       // dd($request->input('accountings'));
+
         /** @var Product $product */
         $product = Product::create([
             'price' => $request->input('price'),
@@ -85,10 +88,14 @@ class ProductsController extends Controller
 
         if($request->has('accountings'))
         {
-            foreach ($request->accountings as $accounting)
-            {
-                $product->accountings()->create($accounting);
-            }
+            $product->accountings()->create([
+                'date' => $request['accountings']['date'],
+                'status' => $request['accountings']['status'],
+                'supplier' => $request['accountings']['supplier'],
+                'whom' => $request['accountings']['whom'],
+                'price' => json_encode($request['accountings']['price']),
+                'message' => json_encode($request['accountings']['message']),
+            ]);
         }
         return redirect()->route('admin.products.edit', $product);
     }
@@ -136,16 +143,14 @@ class ProductsController extends Controller
 
         if($request->has('accountings'))
         {
-            foreach ($request->accountings as $accounting)
-            {
-                if($accounting['id'])
-                {
-                    $product->accountings()->where('id', $accounting['id'])->update($accounting);
-                }else{
-                    $product->accountings()->create($accounting);
-                }
-
-            }
+            $product->accountings()->update([
+                'date' => $request['accountings']['date'],
+                'status' => $request['accountings']['status'],
+                'supplier' => $request['accountings']['supplier'],
+                'whom' => $request['accountings']['whom'],
+                'price' => json_encode($request['accountings']['price']),
+                'message' => json_encode($request['accountings']['message']),
+            ]);
         }
         return redirect()->route('admin.products.edit', $product);
     }

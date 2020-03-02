@@ -92,7 +92,27 @@
                 </div>
             </div>
             <h2 class="mt-4">Бухгалтерия</h2>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="date">Дата</label>
+                    <input type="date" id="date" class="form-control" name="accountings[date]" required>
+                </div>
+                <div class="form-group col-6">
+                    <label for="status">Статус</label>
+                    <input type="text" class="form-control" id="status" name="accountings[status]">
+                </div>
+                <div class="form-group col-6">
+                    <label for="supplier">Поставщик</label>
+                    <input type="text" class="form-control" id="supplier"
+                           name="accountings[supplier]">
+                </div>
+                <div class="form-group col-6">
+                    <label for="whom">Чье</label>
+                    <input type="text" class="form-control" id="whom" name="accountings[whom]">
+                </div>
+            </div>
             <accountings :data="[]"></accountings>
+
         </form>
     </section>
 

@@ -18,10 +18,10 @@ class CreateAccountingsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->date('date');
             $table->string('status')->nullable();
-            $table->float('price')->nullable();
+            $table->json('price')->nullable();
             $table->string('supplier')->nullable();
             $table->string('whom')->nullable();
-            $table->text('message')->nullable();
+            $table->json('message')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

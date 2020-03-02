@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -60,9 +61,9 @@ class Product extends Model implements HasMedia, Sortable
         return $this->hasMany(Order::class);
     }
 
-    public function accountings():HasMany
+    public function accountings():HasOne
     {
-        return $this->hasMany(Accounting::class);
+        return $this->hasOne(Accounting::class);
     }
     /**
      * @return MorphMany

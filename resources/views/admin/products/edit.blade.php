@@ -106,7 +106,26 @@
                 </div>
             </div>
             <h2 class="mt-4">Бухгалтерия</h2>
-            <accountings :data="{{$product->accountings->count() > 0 ? json_encode($product->accountings) : '[]' }}"></accountings>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="date">Дата</label>
+                    <input type="date" id="date" class="form-control" name="accountings[date]" value="{{ $product->accountings->date }}" required>
+                </div>
+                <div class="form-group col-6">
+                    <label for="status">Статус</label>
+                    <input type="text" class="form-control" id="status" name="accountings[status]" value="{{ $product->accountings->status }}">
+                </div>
+                <div class="form-group col-6">
+                    <label for="supplier">Поставщик</label>
+                    <input type="text" class="form-control" id="supplier" value="{{ $product->accountings->supplier }}"
+                           name="accountings[supplier]">
+                </div>
+                <div class="form-group col-6">
+                    <label for="whom">Чье</label>
+                    <input type="text" class="form-control" id="whom" name="accountings[whom]" value="{{ $product->accountings->whom }}">
+                </div>
+            </div>
+            <accountings :data="{{$product->accountings->price }}" :message="{{$product->accountings->message}}"></accountings>
         </form>
     </section>
 
