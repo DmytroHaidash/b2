@@ -21,7 +21,7 @@ Route::group([
     Route::resource('products', 'ProductsController')->except(['show']);
     Route::post('products/order/{product}/{direction}', 'ProductsController@sortOrder')
         ->name('products.sort');
-    Route::delete('accounting/{accounting}', 'ProductsController@destroyAccounting');
+    Route::get('accounting', 'AccountingsController@index')->name('accounting.index');
 
     Route::resource('categories', 'CategoriesController')->except(['show']);
     Route::post('categories/order/{category}/{direction}', 'CategoriesController@sortOrder')

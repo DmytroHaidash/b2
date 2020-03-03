@@ -125,6 +125,10 @@ class Navigation
 						'name' => 'Категории',
 						'route' => 'admin.categories.index',
 					],
+                    'accountings' => [
+                        'name' => 'Бухгалтерия',
+                        'route' => 'admin.accounting.index'
+                    ]
 				],
 			]),
 			new NavigationElement([
