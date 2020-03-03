@@ -1,12 +1,12 @@
 <template>
     <div class="mt-6">
         <accounting
-                v-for="(account, index) in accountings"
-                :accounting="account"
+                v-for="(price, index) in accountings.price"
+                :accountings="accountings"
                 :index="index"
-                :key="account.hash"
+                :key="price.hash"
                 @removeAccounting="removeAccounting(index)"/>
-
+        <p>Итого: {{total}}</p>
         <button class="btn btn-outline-primary" @click.prevent="addAccounting">
             Добавить статью расходов
         </button>
@@ -16,12 +16,14 @@
 
 <script>
   import Accounting from './Accounting'
-  import {accounting} from "../shared/constants";
 
   export default {
     data() {
       return {
-        accountings: [...this.data],
+        accountings: {
+          price: [...this.price],
+          message: [...this.message]
+        },
       }
     },
 
@@ -30,19 +32,31 @@
     },
 
     props: {
-      data: Array
+      price: Array,
+      message: Array
     },
-
-    methods: {
-      addAccounting() {
-        const v = Object.assign({}, accounting);
-        v.hash = new Date().getTime();
-        this.accountings.push(v);
-      },
-
-      removeAccounting(index) {
-        this.accountings.splice(index, 1);
+    mounted() {
+      if (!this.price) {
+        this.addAccounting();
       }
     },
+    computed: {
+      total: function () {
+        return this.accountings.price.reduce(function (total, item) {
+          return total + Number(item);
+        }, 0);
+      }
+    },
+    methods: {
+      addAccounting() {
+        this.accountings.message.push('');
+        this.accountings.price.push('');
+      },
+      removeAccounting(index) {
+        this.accountings.price.splice(index, 1);
+        this.accountings.message.splice(index, 1);
+      }
+    }
+    ,
   }
 </script>

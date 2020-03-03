@@ -1,4 +1,4 @@
 export const accounting = {
-  price: null,
-  message: '',
+  price: ['0'],
+  message: [' '],
 };

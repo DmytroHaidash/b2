@@ -109,23 +109,23 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="date">Дата</label>
-                    <input type="date" id="date" class="form-control" name="accountings[date]" value="{{ $product->accountings->date }}" required>
+                    <input type="date" id="date" class="form-control" name="accountings[date]" value="{{ $product->accountings->date ?? '' }}" required>
                 </div>
                 <div class="form-group col-6">
                     <label for="status">Статус</label>
-                    <input type="text" class="form-control" id="status" name="accountings[status]" value="{{ $product->accountings->status }}">
+                    <input type="text" class="form-control" id="status" name="accountings[status]" value="{{ $product->accountings->status ?? ''}}">
                 </div>
                 <div class="form-group col-6">
                     <label for="supplier">Поставщик</label>
-                    <input type="text" class="form-control" id="supplier" value="{{ $product->accountings->supplier }}"
+                    <input type="text" class="form-control" id="supplier" value="{{ $product->accountings->supplier ?? ''}}"
                            name="accountings[supplier]">
                 </div>
                 <div class="form-group col-6">
                     <label for="whom">Чье</label>
-                    <input type="text" class="form-control" id="whom" name="accountings[whom]" value="{{ $product->accountings->whom }}">
+                    <input type="text" class="form-control" id="whom" name="accountings[whom]" value="{{ $product->accountings->whom ?? '' }}">
                 </div>
             </div>
-            <accountings :data="{{$product->accountings->price }}" :message="{{$product->accountings->message}}"></accountings>
+            <accountings :message="{{$product->accountings->message ?? "['']"}}" :price="{{$product->accountings->price ?? "['0']" }}"></accountings>
         </form>
     </section>
 
