@@ -111,7 +111,7 @@
                     <input type="text" class="form-control" id="whom" name="accountings[whom]">
                 </div>
             </div>
-            <accountings :message="['']" :price="['0']"></accountings>
+            <accountings :message="['']" :price="['']"></accountings>
 
         </form>
     </section>
