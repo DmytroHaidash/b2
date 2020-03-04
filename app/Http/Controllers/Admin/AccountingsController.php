@@ -10,7 +10,7 @@ class AccountingsController extends Controller
 {
     public function index()
     {
-        $accountings = Accounting::get();
+        $accountings = Accounting::paginate(25);
         return \view('admin.accountings.index', compact('accountings'));
     }
 }

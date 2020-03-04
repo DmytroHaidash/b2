@@ -14,11 +14,21 @@ class Accounting extends Model
         'price',
         'message',
         'supplier',
-        'whom'
+        'whom',
+        'amount'
     ];
 
     public function product():HasOne
     {
         return $this->hasOne(Product::class);
+    }
+
+    public function status():HasOne
+    {
+        return $this->hasOne(Status::class);
+    }
+    public function supplier():HasOne
+    {
+        return $this->hasOne(Supplier::class);
     }
 }

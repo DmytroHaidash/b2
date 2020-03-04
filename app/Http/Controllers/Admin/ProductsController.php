@@ -7,6 +7,8 @@ use App\Http\Requests\ProductSavingRequest;
 use App\Models\Catalog\Accounting;
 use App\Models\Catalog\Category;
 use App\Models\Catalog\Product;
+use App\Models\Catalog\Status;
+use App\Models\Catalog\Supplier;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
@@ -19,7 +21,7 @@ use Spatie\MediaLibrary\Models\Media;
 class ProductsController extends Controller
 {
     /**
-     * @param  Request  $request
+     * @param  Request $request
      * @return View
      */
     public function index(Request $request): View
@@ -56,17 +58,17 @@ class ProductsController extends Controller
     {
         return \view('admin.products.create', [
             'categories' => Category::get(),
+            'suppliers' => Supplier::get(),
+            'statuses' => Status::get(),
         ]);
     }
 
     /**
-     * @param  ProductSavingRequest  $request
+     * @param  ProductSavingRequest $request
      * @return RedirectResponse
      */
     public function store(ProductSavingRequest $request): RedirectResponse
     {
-       // dd($request->input('accountings'));
-
         /** @var Product $product */
         $product = Product::create([
             'price' => $request->input('price'),
@@ -86,8 +88,7 @@ class ProductsController extends Controller
             Media::setNewOrder($request->input('media'));
         }
 
-        if($request->has('accountings'))
-        {
+        if ($request->has('accountings')) {
             $product->accountings()->create([
                 'date' => $request['accountings']['date'],
                 'status' => $request['accountings']['status'],
@@ -95,13 +96,14 @@ class ProductsController extends Controller
                 'whom' => $request['accountings']['whom'],
                 'price' => json_encode($request['accountings']['price']),
                 'message' => json_encode($request['accountings']['message']),
+                'amount' => $request['accountings']['amount'],
             ]);
         }
         return redirect()->route('admin.products.edit', $product);
     }
 
     /**
-     * @param  Product  $product
+     * @param  Product $product
      * @return View
      */
     public function edit(Product $product): View
@@ -109,12 +111,14 @@ class ProductsController extends Controller
         return \view('admin.products.edit', [
             'product' => $product,
             'categories' => Category::get(),
+            'suppliers' => Supplier::get(),
+            'statuses' => Status::get(),
         ]);
     }
 
     /**
-     * @param  ProductSavingRequest  $request
-     * @param  Product  $product
+     * @param  ProductSavingRequest $request
+     * @param  Product $product
      * @return RedirectResponse
      */
     public function update(ProductSavingRequest $request, Product $product): RedirectResponse
@@ -141,22 +145,22 @@ class ProductsController extends Controller
             Media::setNewOrder($request->input('media'));
         }
 
-        if($request->has('accountings'))
-        {
-            $product->accountings()->update([
+        if ($request->has('accountings')) {
+            $product->accountings()->updateOrCreate([
                 'date' => $request['accountings']['date'],
-                'status' => $request['accountings']['status'],
-                'supplier' => $request['accountings']['supplier'],
+                'status_id' => $request['accountings']['status'],
+                'supplier_id' => $request['accountings']['supplier'],
                 'whom' => $request['accountings']['whom'],
                 'price' => json_encode($request['accountings']['price']),
                 'message' => json_encode($request['accountings']['message']),
+                'amount' => $request['accountings']['amount'],
             ]);
         }
         return redirect()->route('admin.products.edit', $product);
     }
 
     /**
-     * @param  Product  $product
+     * @param  Product $product
      * @return RedirectResponse
      * @throws Exception
      */

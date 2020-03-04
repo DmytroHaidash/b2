@@ -21,6 +21,10 @@ Route::group([
     Route::resource('products', 'ProductsController')->except(['show']);
     Route::post('products/order/{product}/{direction}', 'ProductsController@sortOrder')
         ->name('products.sort');
+
+    Route::resource('suppliers', 'SuppliersController')->except(['show']);
+    Route::resource('statuses', 'StatusesController')->except(['show']);
+
     Route::get('accounting', 'AccountingsController@index')->name('accounting.index');
 
     Route::resource('categories', 'CategoriesController')->except(['show']);

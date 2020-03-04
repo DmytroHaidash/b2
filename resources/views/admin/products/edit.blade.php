@@ -106,6 +106,7 @@
                 </div>
             </div>
             <h2 class="mt-4">Бухгалтерия</h2>
+            @if($statuses->count() > 0 && $suppliers->count() > 0)
             <div class="row">
                 <div class="form-group col-6">
                     <label for="date">Дата</label>
@@ -113,12 +114,25 @@
                 </div>
                 <div class="form-group col-6">
                     <label for="status">Статус</label>
-                    <input type="text" class="form-control" id="status" name="accountings[status]" value="{{ $product->accountings->status ?? ''}}">
+                    <select name="accountings[status_id]" id="status" class="form-control">
+                        <option value="">-------</option>
+                        @foreach($statuses as $status)
+                            <option value="{{ $status->id }}" {{ $status->id === $product->accountings->status_id ? 'selected' : '' }}>
+                                {{ $status->title }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group col-6">
                     <label for="supplier">Поставщик</label>
-                    <input type="text" class="form-control" id="supplier" value="{{ $product->accountings->supplier ?? ''}}"
-                           name="accountings[supplier]">
+                    <select name="accountings[supplier_id]" id="supplier" class="form-control">
+                        <option value="">-------</option>
+                        @foreach($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}" {{ $supplier->id === $product->accountings->supplier_id ? 'selected' : '' }}>
+                                {{ $supplier->title }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group col-6">
                     <label for="whom">Чье</label>
@@ -126,6 +140,16 @@
                 </div>
             </div>
             <accountings :message="{{$product->accountings->message ?? "['']"}}" :price="{{$product->accountings->price ?? "['0']" }}"></accountings>
+            @else
+                <p>Для ведения бухгалтерии сначала создайте:
+                    @if($suppliers->count() == 0)
+                        <a href="{{route('admin.suppliers.create')}}" class="btn btn-outline-primary">Поставщиков</a>
+                    @endif
+                    @if($statuses->count() == 0)
+                        <a href="{{route('admin.statuses.create')}}" class="btn btn-outline-primary">Cтатусы</a>
+                    @endif
+                </p>
+            @endif
         </form>
     </section>
 

@@ -52,24 +52,24 @@
                     </div>
 
                     <div class="form-group">
-                    @if ($categories->count())
-                        <label>Категории</label>
-                        <div class="d-flex flex-wrap">
-                            @foreach($categories as $category)
-                                <div class="border py-1 px-2 mr-3 mb-2 rounded">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input"
-                                               id="category-{{ $category->id }}" name="categories[]"
-                                               value="{{ $category->id }}">
-                                        <label class="custom-control-label"
-                                               for="category-{{ $category->id }}">
-                                            {{ $category->translate('title') }}
-                                        </label>
+                        @if ($categories->count())
+                            <label>Категории</label>
+                            <div class="d-flex flex-wrap">
+                                @foreach($categories as $category)
+                                    <div class="border py-1 px-2 mr-3 mb-2 rounded">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="category-{{ $category->id }}" name="categories[]"
+                                                   value="{{ $category->id }}">
+                                            <label class="custom-control-label"
+                                                   for="category-{{ $category->id }}">
+                                                {{ $category->translate('title') }}
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -92,26 +92,50 @@
                 </div>
             </div>
             <h2 class="mt-4">Бухгалтерия</h2>
-            <div class="row">
-                <div class="form-group col-6">
-                    <label for="date">Дата</label>
-                    <input type="date" id="date" class="form-control" name="accountings[date]" required>
+            @if($statuses->count() > 0 && $suppliers->count() > 0)
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="date">Дата</label>
+                        <input type="date" id="date" class="form-control" name="accountings[date]" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="status">Статус</label>
+                        <select name="accountings[status_id]" id="status" class="form-control">
+                            <option value="">-------</option>
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}">
+                                    {{ $status->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="supplier">Поставщик</label>
+                        <select name="accountings[supplier_id]" id="supplier" class="form-control">
+                            <option value="">-------</option>
+                            @foreach($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}">
+                                    {{ $supplier->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="whom">Чье</label>
+                        <input type="text" class="form-control" id="whom" name="accountings[whom]">
+                    </div>
                 </div>
-                <div class="form-group col-6">
-                    <label for="status">Статус</label>
-                    <input type="text" class="form-control" id="status" name="accountings[status]">
-                </div>
-                <div class="form-group col-6">
-                    <label for="supplier">Поставщик</label>
-                    <input type="text" class="form-control" id="supplier"
-                           name="accountings[supplier]">
-                </div>
-                <div class="form-group col-6">
-                    <label for="whom">Чье</label>
-                    <input type="text" class="form-control" id="whom" name="accountings[whom]">
-                </div>
-            </div>
-            <accountings :message="['']" :price="['']"></accountings>
+                <accountings :message="['']" :price="['']"></accountings>
+            @else
+                <p>Для ведения бухгалтерии сначала создайте:
+                    @if($suppliers->count() == 0)
+                        <a href="{{route('admin.suppliers.create')}}">Поставщиков</a>
+                    @endif
+                    @if($statuses->count() == 0)
+                        <a href="{{route('admin.statuses.create')}}">Cтатусы</a>
+                    @endif
+                </p>
+            @endif
 
         </form>
     </section>

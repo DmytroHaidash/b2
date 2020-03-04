@@ -7,6 +7,7 @@
                 :key="price.hash"
                 @removeAccounting="removeAccounting(index)"/>
         <p>Итого: {{total}}</p>
+        <input type="hidden" name="accountings[amount]" :value="total">
         <button class="btn btn-outline-primary" @click.prevent="addAccounting">
             Добавить статью расходов
         </button>
@@ -22,7 +23,8 @@
       return {
         accountings: {
           price: [...this.price],
-          message: [...this.message]
+          message: [...this.message],
+          amount: this.total
         },
       }
     },

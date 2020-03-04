@@ -124,13 +124,30 @@ class Navigation
 					'categories' => [
 						'name' => 'Категории',
 						'route' => 'admin.categories.index',
-					],
-                    'accountings' => [
-                        'name' => 'Бухгалтерия',
-                        'route' => 'admin.accounting.index'
-                    ]
+					]
 				],
 			]),
+
+            new NavigationElement([
+                'name' => 'Бухгалтерия',
+                'route' => 'accounting',
+                'icon' => 'i-versions',
+                'compare' => ['suppliers', 'statuses'],
+                'submenu' => [
+                    'accountings' => [
+                        'name' => 'Вся бухгалтерия',
+                        'route' => 'admin.accounting.index'
+                    ],
+                    'products' => [
+                        'name' => 'Поставщики',
+                        'route' => 'admin.suppliers.index',
+                    ],
+                    'categories' => [
+                        'name' => 'Статусы',
+                        'route' => 'admin.statuses.index',
+                    ]
+                ],
+            ]),
 			new NavigationElement([
 				'name' => 'Статьи',
 				'route' => 'articles',
