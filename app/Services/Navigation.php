@@ -132,9 +132,9 @@ class Navigation
                 'name' => 'Бухгалтерия',
                 'route' => 'accounting',
                 'icon' => 'i-versions',
-                'compare' => ['suppliers', 'statuses'],
+                'compare' => ['accounting', 'suppliers', 'statuses'],
                 'submenu' => [
-                    'accountings' => [
+                    'accounting' => [
                         'name' => 'Вся бухгалтерия',
                         'route' => 'admin.accounting.index'
                     ],
