@@ -117,7 +117,7 @@
                     <select name="accountings[status_id]" id="status" class="form-control">
                         <option value="">-------</option>
                         @foreach($statuses as $status)
-                            <option value="{{ $status->id }}" {{ $status->id === $product->accountings->status_id ? 'selected' : '' }}>
+                            <option value="{{ $status->id }}" {{ $product->accountings ? ($status->id === $product->accountings->status_id ? 'selected' : ''): '' }}>
                                 {{ $status->title }}
                             </option>
                         @endforeach
@@ -128,7 +128,7 @@
                     <select name="accountings[supplier_id]" id="supplier" class="form-control">
                         <option value="">-------</option>
                         @foreach($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}" {{ $supplier->id === $product->accountings->supplier_id ? 'selected' : '' }}>
+                            <option value="{{ $supplier->id }}" {{ $product->accountings ? ($supplier->id === $product->accountings->supplier_id ? 'selected' : ''): '' }}>
                                 {{ $supplier->title }}
                             </option>
                         @endforeach

@@ -3,6 +3,7 @@
 namespace App\Models\Catalog;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Accounting extends Model
@@ -10,25 +11,25 @@ class Accounting extends Model
     protected $fillable = [
         'product_id',
         'date',
-        'status',
+        'status_id',
         'price',
         'message',
-        'supplier',
+        'supplier_id',
         'whom',
         'amount'
     ];
 
-    public function product():HasOne
+    public function product():BelongsTo
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
-    public function status():HasOne
+    public function status():BelongsTo
     {
-        return $this->hasOne(Status::class);
+        return $this->belongsTo(Status::class);
     }
-    public function supplier():HasOne
+    public function supplier():BelongsTo
     {
-        return $this->hasOne(Supplier::class);
+        return $this->belongsTo(Supplier::class);
     }
 }

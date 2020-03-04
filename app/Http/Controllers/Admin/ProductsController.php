@@ -146,16 +146,29 @@ class ProductsController extends Controller
         }
 
         if ($request->has('accountings')) {
-            $product->accountings()->updateOrCreate([
+            if($product->accountings()){
+            $product->accountings()->update([
                 'date' => $request['accountings']['date'],
-                'status_id' => $request['accountings']['status'],
-                'supplier_id' => $request['accountings']['supplier'],
+                'status_id' => $request['accountings']['status_id'],
+                'supplier_id' => $request['accountings']['supplier_id'],
                 'whom' => $request['accountings']['whom'],
                 'price' => json_encode($request['accountings']['price']),
                 'message' => json_encode($request['accountings']['message']),
                 'amount' => $request['accountings']['amount'],
             ]);
+            }else{
+                $product->accountings()->create([
+                    'date' => $request['accountings']['date'],
+                    'status' => $request['accountings']['status'],
+                    'supplier' => $request['accountings']['supplier'],
+                    'whom' => $request['accountings']['whom'],
+                    'price' => json_encode($request['accountings']['price']),
+                    'message' => json_encode($request['accountings']['message']),
+                    'amount' => $request['accountings']['amount'],
+                ]);
+            }
         }
+
         return redirect()->route('admin.products.edit', $product);
     }
 

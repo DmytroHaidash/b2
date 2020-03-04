@@ -25,7 +25,7 @@
                     <td>
                         {{ $accounting->status }}
                     </td>
-                    <td class="text-center">{{ $accounting->supplier }}</td>
+                    <td class="text-center">{{ $accounting->supplier->title ?? '' }}</td>
                     <td class="text-center">{{ $accounting->whom }}</td>
                     <td width="150" class="small">
 
