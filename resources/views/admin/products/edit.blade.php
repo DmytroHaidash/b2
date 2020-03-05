@@ -110,7 +110,7 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="date">Дата</label>
-                    <input type="date" id="date" class="form-control" name="accountings[date]" value="{{ $product->accountings->date ?? '' }}" required>
+                    <input type="date" id="date" class="form-control" name="accountings[date]" value="{{ $product->accountings->date ?? date("Y-m-d") }}" required>
                 </div>
                 <div class="form-group col-6">
                     <label for="status">Статус</label>
