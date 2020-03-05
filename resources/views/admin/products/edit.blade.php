@@ -107,39 +107,45 @@
             </div>
             <h2 class="mt-4">Бухгалтерия</h2>
             @if($statuses->count() > 0 && $suppliers->count() > 0)
-            <div class="row">
-                <div class="form-group col-6">
-                    <label for="date">Дата</label>
-                    <input type="date" id="date" class="form-control" name="accountings[date]" value="{{ $product->accountings->date ?? date("Y-m-d") }}" required>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="date">Дата</label>
+                        <input type="date" id="date" class="form-control" name="accountings[date]"
+                               value="{{ $product->accountings->date ?? date("Y-m-d") }}" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="status">Статус</label>
+                        <select name="accountings[status_id]" id="status" class="form-control">
+                            <option value="">-------</option>
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}" {{ $product->accountings ? ($status->id === $product->accountings->status_id ? 'selected' : ''): '' }}>
+                                    {{ $status->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="supplier">Поставщик</label>
+                        <select name="accountings[supplier_id]" id="supplier" class="form-control">
+                            <option value="">-------</option>
+                            @foreach($suppliers as $supplier)
+                                <option value="{{ $supplier->id }}" {{ $product->accountings ? ($supplier->id === $product->accountings->supplier_id ? 'selected' : ''): '' }}>
+                                    {{ $supplier->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="whom">Чье</label>
+                        <input type="text" class="form-control" id="whom" name="accountings[whom]"
+                               value="{{ $product->accountings->whom ?? '' }}">
+                    </div>
                 </div>
-                <div class="form-group col-6">
-                    <label for="status">Статус</label>
-                    <select name="accountings[status_id]" id="status" class="form-control">
-                        <option value="">-------</option>
-                        @foreach($statuses as $status)
-                            <option value="{{ $status->id }}" {{ $product->accountings ? ($status->id === $product->accountings->status_id ? 'selected' : ''): '' }}>
-                                {{ $status->title }}
-                            </option>
-                        @endforeach
-                    </select>
+                <accountings :message="{{$product->accountings->message ?? "['']"}}"
+                             :price="{{$product->accountings->price ?? "['0']" }}"></accountings>
+                <div class="d-flex align-items-center mt-4">
+                    <button class="btn btn-primary">Сохранить</button>
                 </div>
-                <div class="form-group col-6">
-                    <label for="supplier">Поставщик</label>
-                    <select name="accountings[supplier_id]" id="supplier" class="form-control">
-                        <option value="">-------</option>
-                        @foreach($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}" {{ $product->accountings ? ($supplier->id === $product->accountings->supplier_id ? 'selected' : ''): '' }}>
-                                {{ $supplier->title }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-6">
-                    <label for="whom">Чье</label>
-                    <input type="text" class="form-control" id="whom" name="accountings[whom]" value="{{ $product->accountings->whom ?? '' }}">
-                </div>
-            </div>
-            <accountings :message="{{$product->accountings->message ?? "['']"}}" :price="{{$product->accountings->price ?? "['0']" }}"></accountings>
             @else
                 <p>Для ведения бухгалтерии сначала создайте:
                     @if($suppliers->count() == 0)
@@ -150,9 +156,7 @@
                     @endif
                 </p>
             @endif
-            <div class="d-flex align-items-center mt-4">
-                <button class="btn btn-primary">Сохранить</button>
-            </div>
+
         </form>
     </section>
 

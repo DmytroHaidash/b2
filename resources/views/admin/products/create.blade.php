@@ -96,7 +96,8 @@
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="date">Дата</label>
-                        <input type="date" id="date" class="form-control" name="accountings[date]" value="{{date("Y-m-d")}}" required>
+                        <input type="date" id="date" class="form-control" name="accountings[date]"
+                               value="{{date("Y-m-d")}}" required>
                     </div>
                     <div class="form-group col-6">
                         <label for="status">Статус</label>
@@ -126,6 +127,9 @@
                     </div>
                 </div>
                 <accountings :message="['']" :price="['']"></accountings>
+                <div class="d-flex align-items-center mt-4">
+                    <button class="btn btn-primary">Сохранить</button>
+                </div>
             @else
                 <p>Для ведения бухгалтерии сначала создайте:
                     @if($suppliers->count() == 0)
@@ -136,9 +140,7 @@
                     @endif
                 </p>
             @endif
-            <div class="d-flex align-items-center mt-4">
-                <button class="btn btn-primary">Сохранить</button>
-            </div>
+
         </form>
     </section>
 
