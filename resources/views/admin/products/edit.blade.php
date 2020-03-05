@@ -150,6 +150,9 @@
                     @endif
                 </p>
             @endif
+            <div class="d-flex align-items-center mt-4">
+                <button class="btn btn-primary">Сохранить</button>
+            </div>
         </form>
     </section>
 

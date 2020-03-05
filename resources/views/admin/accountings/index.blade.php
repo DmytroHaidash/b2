@@ -2,9 +2,34 @@
 
 @section('content')
     <section id="content">
-        <div class="d-flex align-items-center mb-5">
+        <div class="d-flex align-items-center">
             <h1 class="h3 mb-0">Бухгалтерия</h1>
         </div>
+        @if(request('status') || request('supplier'))
+            <a href="{{ route('admin.accounting.index') }}"
+               class="btn mt-2 btn-outline-primary mb-2">
+                Сбросить фильтры
+            </a>
+        @endif
+        <div class="mb-2">
+            <p class="mb-0">Фильтрация по статусу:</p>
+            @foreach($statuses as $status)
+                <a href="?status={{ $status->id }}"
+                   class="btn mr-2  mt-2 btn-{{ request('status') == $status->id ? 'primary' : 'outline-primary' }}">
+                    {{$status->title}}
+                </a>
+            @endforeach
+        </div>
+        <div class="mb-2">
+            <p class="mb-0">Фильтрация по поставщику:</p>
+            @foreach($suppliers as $supplier)
+                <a href="?supplier={{ $supplier->id }}"
+                   class="btn mr-2 mt-2 btn-{{ request('supplier') == $supplier->id ? 'primary' : 'outline-primary' }}">
+                    {{$supplier->title}}
+                </a>
+            @endforeach
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr class="small">
@@ -29,7 +54,7 @@
                     <td class="text-center">{{ $accounting->supplier->title ?? '' }}</td>
                     <td class="text-center">{{ $accounting->whom }}</td>
                     <td width="150" class="small text-center">
-                            {{$accounting->amount}}
+                        {{$accounting->amount}}
                     </td>
                     <td width="100" class="text-right">
                         <a href="{{ route('admin.products.edit', $accounting->product) }}"
@@ -40,7 +65,15 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="text-center">Бухгалтерия пока не ведется</td>
+                    <td colspan="6" class="text-center">
+                        @if(request()->filled('status'))
+                            Записей с таким статусом нет
+                        @elseif(request()->filled('supplier'))
+                            Записей с этим поставщиком нет
+                        @else
+                            Бухгалтерия пока не ведется
+                        @endif
+                    </td>
                 </tr>
             @endforelse
         </table>

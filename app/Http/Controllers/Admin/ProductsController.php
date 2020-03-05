@@ -91,8 +91,8 @@ class ProductsController extends Controller
         if ($request->has('accountings')) {
             $product->accountings()->create([
                 'date' => $request['accountings']['date'],
-                'status' => $request['accountings']['status'],
-                'supplier' => $request['accountings']['supplier'],
+                'status' => $request['accountings']['status_id'],
+                'supplier' => $request['accountings']['supplier_id'],
                 'whom' => $request['accountings']['whom'],
                 'price' => json_encode($request['accountings']['price']),
                 'message' => json_encode($request['accountings']['message']),
@@ -146,8 +146,8 @@ class ProductsController extends Controller
         }
 
         if ($request->has('accountings')) {
-            if($product->accountings()){
-            $product->accountings()->update([
+            if($product->accountings){
+            $product->accountings->update([
                 'date' => $request['accountings']['date'],
                 'status_id' => $request['accountings']['status_id'],
                 'supplier_id' => $request['accountings']['supplier_id'],
@@ -159,8 +159,8 @@ class ProductsController extends Controller
             }else{
                 $product->accountings()->create([
                     'date' => $request['accountings']['date'],
-                    'status' => $request['accountings']['status'],
-                    'supplier' => $request['accountings']['supplier'],
+                    'status' => $request['accountings']['status_id'],
+                    'supplier' => $request['accountings']['supplier_id'],
                     'whom' => $request['accountings']['whom'],
                     'price' => json_encode($request['accountings']['price']),
                     'message' => json_encode($request['accountings']['message']),
@@ -203,16 +203,5 @@ class ProductsController extends Controller
         $product->save();
 
         return back();
-    }
-
-    /**
-     * @param Accounting $accounting
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     * @throws \Exception
-     */
-    public function destroyAccounting(Accounting $accounting)
-    {
-        $accounting->delete();
-        return \response(null, 204);
     }
 }

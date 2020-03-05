@@ -135,6 +135,9 @@
     &__item {
         padding: rem-calc(3) rem-calc(5);
 
+        &:hover {
+            color: $gold;
+        }
         &.is-active {
             background-color: $primary;
             color: #fff;
@@ -148,6 +151,11 @@
     display: inline-block;
     svg {
         fill: #fff;
+    }
+}
+.nav-search-icon{
+    &:hover {
+        color: $gold;
     }
 }
 

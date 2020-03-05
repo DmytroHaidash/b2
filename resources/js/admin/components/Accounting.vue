@@ -12,8 +12,8 @@
                    :name="`accountings[message][${index}]`"
                    v-model="accountings.message[index]">
         </div>
-        <div class="col-1 mt-4">
-            <button class="btn btn-primary" @click.prevent="removeAccounting">X</button>
+        <div class="col-1" style="margin-top: 2.5rem">
+            <button class="btn btn-outline-primary" @click.prevent="removeAccounting">X</button>
         </div>
     </div>
 </template>

@@ -58,7 +58,7 @@ class StatusesController extends Controller
     public function update(Request $request, Status $status): RedirectResponse
     {
         /** @var Status $status */
-        $status = Status::update(['title' => $request->input('title')]);
+        $status = $status->update(['title' => $request->input('title')]);
 
 
         return redirect()->route('admin.statuses.edit', $status);

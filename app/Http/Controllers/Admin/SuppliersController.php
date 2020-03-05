@@ -58,7 +58,7 @@ class SuppliersController extends Controller
     public function update(Request $request, Supplier $supplier): RedirectResponse
     {
         /** @var Supplier $supplier */
-        $supplier = Supplier::update(['title' => $request->input('title')]);
+        $supplier = $supplier->update(['title' => $request->input('title')]);
 
         return redirect()->route('admin.suppliers.edit', $supplier);
     }

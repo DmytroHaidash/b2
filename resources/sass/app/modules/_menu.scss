@@ -39,6 +39,7 @@
                     transform: translate(-50%, -50%) rotate(-45deg);
                 }
             }
+
         }
     }
 
@@ -68,7 +69,7 @@
 
         .line {
             border: 3px solid $dark;
-            background: #fff;
+            background: $gold;
         }
     }
 }
@@ -130,15 +131,8 @@
             }
 
             &:hover {
-                left: 20px;
-
                 .menu-nav-list-item__link {
-                    color: #fff;
-
-                    &::before {
-                        opacity: 1;
-                        right: -10px;
-                    }
+                    color: $gold;
                 }
             }
         }
