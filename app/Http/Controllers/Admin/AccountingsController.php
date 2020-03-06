@@ -19,10 +19,13 @@ class AccountingsController extends Controller
         if(\request()->filled('supplier')){
             $accountings = $accountings->where('supplier_id', \request('supplier'));
         }
+        $amount = $accountings->pluck('amount');
+        $amount = array_sum($amount->toArray());
         return \view('admin.accountings.index', [
             'accountings' => $accountings->paginate(10),
             'statuses' =>  Status::get(),
             'suppliers' => Supplier::get(),
+            'amount' => $amount,
         ]);
     }
 }

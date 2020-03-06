@@ -29,7 +29,7 @@
                 </a>
             @endforeach
         </div>
-
+        <p>Общая себестоимость товаров по которым ведется учет: {{$amount}}</p>
         <table class="table table-striped">
             <thead>
             <tr class="small">
