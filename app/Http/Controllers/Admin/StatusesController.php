@@ -38,7 +38,7 @@ class StatusesController extends Controller
         /** @var Status $status */
         $status = Status::create(['title' => $request->input('title')]);
 
-        return redirect()->route('admin.statuses.edit', $status);
+        return redirect()->route('admin.statuses.index');
     }
 
     /**
@@ -61,7 +61,7 @@ class StatusesController extends Controller
         $status = $status->update(['title' => $request->input('title')]);
 
 
-        return redirect()->route('admin.statuses.edit', $status);
+        return redirect()->route('admin.statuses.index');
     }
 
 

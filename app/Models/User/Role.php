@@ -9,6 +9,7 @@ class Role extends Model
 {
 	public static $ROLES = [
 		'admin',
+        'manager',
 		'customer',
 	];
 

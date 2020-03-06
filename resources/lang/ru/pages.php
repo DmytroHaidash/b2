@@ -91,8 +91,8 @@ return [
         'buy' => 'Купить',
         'ordered' => 'Уже заказано',
         'question' => 'Задать вопрос',
-        'in_stock' => 'Есть в наличии',
-        'out_of_stock' => 'Под заказ'
+        'in_stock' => 'В наличии',
+        'out_of_stock' => 'Уточните наличие'
     ],
 
     'questionary' => [

@@ -26,6 +26,7 @@ Route::group([
     Route::resource('statuses', 'StatusesController')->except(['show']);
 
     Route::get('accounting', 'AccountingsController@index')->name('accounting.index');
+    Route::get('accounting/{product}', 'AccountingsController@pdf')->name('accounting.pdf');
 
     Route::resource('categories', 'CategoriesController')->except(['show']);
     Route::post('categories/order/{category}/{direction}', 'CategoriesController@sortOrder')

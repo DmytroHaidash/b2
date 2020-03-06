@@ -38,7 +38,7 @@ class SuppliersController extends Controller
         /** @var Supplier $supplier */
         $supplier = Supplier::create(['title' => $request->input('title')]);
 
-        return redirect()->route('admin.suppliers.edit', $supplier);
+        return redirect()->route('admin.suppliers.index');
     }
 
     /**
@@ -60,7 +60,7 @@ class SuppliersController extends Controller
         /** @var Supplier $supplier */
         $supplier = $supplier->update(['title' => $request->input('title')]);
 
-        return redirect()->route('admin.suppliers.edit', $supplier);
+        return redirect()->route('admin.suppliers.index');
     }
 
 

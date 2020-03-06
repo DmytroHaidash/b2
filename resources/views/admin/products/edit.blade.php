@@ -143,6 +143,18 @@
                 </div>
                 <accountings :message="{{$product->accountings->message ?? "['']"}}"
                              :price="{{$product->accountings->price ?? "['0']" }}"></accountings>
+                <div class="form-group col-12">
+                    <label for="comment">Заметки</label>
+                    <textarea name="accountings[comment]" class="form-control"
+                              id="comment">{{$product->accountings->comment ?? ""}}</textarea>
+                </div>
+                <multi-image-uploader name="accounting" class="mt-4"
+                                      :src="{{ json_encode($product->accountings->images_list) }}"></multi-image-uploader>
+                @if($product->accountings->hasMedia('uploads'))
+                    <div class="d-flex align-items-center mt-4">
+                        <a href="{{route('admin.accounting.pdf', $product)}}" class="btn btn-outline-primary">Скачать изображения</a>
+                    </div>
+                @endif
                 <div class="d-flex align-items-center mt-4">
                     <button class="btn btn-primary">Сохранить</button>
                 </div>

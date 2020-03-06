@@ -84,6 +84,8 @@ return [
 		'buy' => 'Buy',
 		'ordered' => 'Already ordered',
 		'question' => 'Ask a question',
+        'in_stock' => 'In stock',
+        'out_of_stock' => 'Check availability'
 	],
 
 	'questionary' => [

@@ -2,12 +2,18 @@
 
 namespace App\Models\Catalog;
 
+use App\Http\Resources\ImageResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class Accounting extends Model
+class Accounting extends Model implements HasMedia
 {
+    use HasMediaTrait;
+
     protected $fillable = [
         'product_id',
         'date',
@@ -16,7 +22,8 @@ class Accounting extends Model
         'message',
         'supplier_id',
         'whom',
-        'amount'
+        'amount',
+        'comment'
     ];
 
     public function product():BelongsTo
@@ -31,5 +38,13 @@ class Accounting extends Model
     public function supplier():BelongsTo
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function getImagesListAttribute()
+    {
+        return ImageResource::collection($this->getMedia('uploads'));
     }
 }

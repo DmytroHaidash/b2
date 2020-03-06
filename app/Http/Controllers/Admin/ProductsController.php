@@ -88,6 +88,7 @@ class ProductsController extends Controller
             Media::setNewOrder($request->input('media'));
         }
 
+
         if ($request->has('accountings')) {
             $product->accountings()->create([
                 'date' => $request['accountings']['date'],
@@ -97,7 +98,17 @@ class ProductsController extends Controller
                 'price' => json_encode($request['accountings']['price']),
                 'message' => json_encode($request['accountings']['message']),
                 'amount' => $request['accountings']['amount'],
+                'comment' => $request['accountings']['comment'],
             ]);
+            if ($request->has('accounting')) {
+                foreach ($request->accounting as $media) {
+                    Media::find($media)->update([
+                        'model_type' => Accounting::class,
+                        'model_id' => $product->accountings->id,
+                    ]);
+                }
+                Media::setNewOrder($request->input('accounting'));
+            }
         }
         return redirect()->route('admin.products.edit', $product);
     }
@@ -123,6 +134,7 @@ class ProductsController extends Controller
      */
     public function update(ProductSavingRequest $request, Product $product): RedirectResponse
     {
+       /* dd($request->accounting);*/
         if ($request->has('regenerate')) {
             $product->slug = null;
         }
@@ -155,6 +167,7 @@ class ProductsController extends Controller
                 'price' => json_encode($request['accountings']['price']),
                 'message' => json_encode($request['accountings']['message']),
                 'amount' => $request['accountings']['amount'],
+                'comment' => $request['accountings']['comment'],
             ]);
             }else{
                 $product->accountings()->create([
@@ -165,7 +178,17 @@ class ProductsController extends Controller
                     'price' => json_encode($request['accountings']['price']),
                     'message' => json_encode($request['accountings']['message']),
                     'amount' => $request['accountings']['amount'],
+                    'comment' => $request['accountings']['comment'],
                 ]);
+            }
+            if ($request->has('accounting')) {
+                foreach ($request->accounting as $media) {
+                    Media::find($media)->update([
+                        'model_type' => Accounting::class,
+                        'model_id' => $product->accountings->id,
+                    ]);
+                }
+                Media::setNewOrder($request->input('accounting'));
             }
         }
 

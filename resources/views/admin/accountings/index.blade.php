@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <h1 class="h3 mb-0">Бухгалтерия</h1>
         </div>
-        @if(request('status') || request('supplier'))
+        @if(request('status') || request('supplier') || request('q'))
             <a href="{{ route('admin.accounting.index') }}"
                class="btn mt-2 btn-outline-primary mb-2">
                 Сбросить фильтры
@@ -29,7 +29,20 @@
                 </a>
             @endforeach
         </div>
-        <p>Общая себестоимость товаров по которым ведется учет: {{$amount}}</p>
+        <form class="my-4 d-flex">
+            <div class="mr-2 flex-grow-1">
+                <input type="text" name="q" value="{{ request()->get('q', null) }}" class="form-control"
+                       placeholder="Поиск по товарам">
+            </div>
+            <button class="btn btn-primary">
+                <i class="i-search"></i>
+                Найти
+            </button>
+        </form>
+        <p>Общая стоимость товаров: {{$amountProduct}}</p>
+        <p>Общая себестоимость товаров по которым ведется учет: {{$amountAcc}}</p>
+        <p>Общая стоимость опубликованых товаров: {{$amountPublishedProduct}}</p>
+        <p>Общая себестоимость  опубликованых товаров по которым ведется учет: {{$amountPublishedAcc}}</p>
         <table class="table table-striped">
             <thead>
             <tr class="small">

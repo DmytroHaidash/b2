@@ -127,6 +127,12 @@
                     </div>
                 </div>
                 <accountings :message="['']" :price="['']"></accountings>
+                <div class="form-group col-12">
+                    <label for="comment">Заметки</label>
+                    <textarea name="accountings[comment]" class="form-control" id="comment"></textarea>
+
+                </div>
+                <multi-image-uploader name="accounting" class="mt-4"></multi-image-uploader>
                 <div class="d-flex align-items-center mt-4">
                     <button class="btn btn-primary">Сохранить</button>
                 </div>

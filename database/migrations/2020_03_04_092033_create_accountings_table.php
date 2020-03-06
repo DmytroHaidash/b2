@@ -23,6 +23,7 @@ class CreateAccountingsTable extends Migration
             $table->string('whom')->nullable();
             $table->float('amount')->nullable();
             $table->json('message')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

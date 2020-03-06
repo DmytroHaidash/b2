@@ -28,7 +28,7 @@
             </div>
         </label>
 
-        <input type="hidden" name="media[]" v-for="m in images" :key="m.id" :value="m.id">
+        <input type="hidden" :name="name ? name+'[]' : 'media[]'" v-for="m in images" :key="m.id" :value="m.id">
     </div>
 </template>
 
