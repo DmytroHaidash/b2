@@ -26,11 +26,11 @@
                 <label for="role">Роль</label>
 
                 <input type="hidden" name="role" value="{{ $user->role }}">
-                <select name="role" id="role" class="form-control">
-                    @foreach(\App\Models\User\Role::$ROLES as $role)
-                        <option value="{{ $role }}"
-                            {{ $role === $user->role ? 'selected' : '' }}>
-                            {{ __('admin.roles.'.strtolower($role)) }}
+                <select name="role_id" id="role" class="form-control">
+                    @foreach($roles as $role)
+                        <option value="{{ $role->id }}"
+                            {{ $role->id === $user->role_id ? 'selected' : '' }}>
+                            {{$role->name == 'admin' ? 'Администратор' : ($role->name  == 'moderator' ? 'Модератор' : 'Пользователь')}}
                         </option>
                     @endforeach
                 </select>

@@ -38,8 +38,8 @@
                         @endforeach
 
                         <multi-image-uploader
-                                class="mt-4"
-                                :src="{{ json_encode($product->images_list) }}"></multi-image-uploader>
+                            class="mt-4"
+                            :src="{{ json_encode($product->images_list) }}"></multi-image-uploader>
                     </block-editor>
                 </div>
 
@@ -93,7 +93,7 @@
                 <div class="custom-control custom-checkbox ml-3">
                     <input type="checkbox" class="custom-control-input"
                            id="published" name="is_published"
-                            {{ $product->is_published ? 'checked' : '' }}>
+                        {{ $product->is_published ? 'checked' : '' }}>
                     <label class="custom-control-label" for="published">Опубликовать</label>
                 </div>
 
@@ -105,68 +105,78 @@
                     </div>
                 </div>
             </div>
-            <h2 class="mt-4">Бухгалтерия</h2>
-            @if($statuses->count() > 0 && $suppliers->count() > 0)
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="date">Дата</label>
-                        <input type="date" id="date" class="form-control" name="accountings[date]"
-                               value="{{ $product->accountings->date ?? date("Y-m-d") }}" required>
+            @if(\Auth::user()->hasRole('admin'))
+                <h2 class="mt-4">Бухгалтерия</h2>
+                @if($statuses->count() > 0 && $suppliers->count() > 0)
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="date">Дата</label>
+                            <input type="date" id="date" class="form-control" name="accountings[date]"
+                                   value="{{ $product->accountings->date ?? date("Y-m-d") }}" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="status">Статус</label>
+                            <select name="accountings[status_id]" id="status" class="form-control">
+                                <option value="">-------</option>
+                                @foreach($statuses as $status)
+                                    <option
+                                        value="{{ $status->id }}" {{ $product->accountings ? ($status->id === $product->accountings->status_id ? 'selected' : ''): '' }}>
+                                        {{ $status->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="supplier">Поставщик</label>
+                            <select name="accountings[supplier_id]" id="supplier" class="form-control">
+                                <option value="">-------</option>
+                                @foreach($suppliers as $supplier)
+                                    <option
+                                        value="{{ $supplier->id }}" {{ $product->accountings ? ($supplier->id === $product->accountings->supplier_id ? 'selected' : ''): '' }}>
+                                        {{ $supplier->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="whom">Чье</label>
+                            <input type="text" class="form-control" id="whom" name="accountings[whom]"
+                                   value="{{ $product->accountings->whom ?? '' }}">
+                        </div>
                     </div>
-                    <div class="form-group col-6">
-                        <label for="status">Статус</label>
-                        <select name="accountings[status_id]" id="status" class="form-control">
-                            <option value="">-------</option>
-                            @foreach($statuses as $status)
-                                <option value="{{ $status->id }}" {{ $product->accountings ? ($status->id === $product->accountings->status_id ? 'selected' : ''): '' }}>
-                                    {{ $status->title }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <accountings :message="{{$product->accountings->message ?? "['']"}}"
+                                 :price="{{$product->accountings->price ?? "['0']" }}"></accountings>
+                    <div class="form-group col-12">
+                        <label for="comment">Заметки</label>
+                        <textarea name="accountings[comment]" class="form-control"
+                                  id="comment">{{$product->accountings->comment ?? ""}}</textarea>
                     </div>
-                    <div class="form-group col-6">
-                        <label for="supplier">Поставщик</label>
-                        <select name="accountings[supplier_id]" id="supplier" class="form-control">
-                            <option value="">-------</option>
-                            @foreach($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}" {{ $product->accountings ? ($supplier->id === $product->accountings->supplier_id ? 'selected' : ''): '' }}>
-                                    {{ $supplier->title }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="whom">Чье</label>
-                        <input type="text" class="form-control" id="whom" name="accountings[whom]"
-                               value="{{ $product->accountings->whom ?? '' }}">
-                    </div>
-                </div>
-                <accountings :message="{{$product->accountings->message ?? "['']"}}"
-                             :price="{{$product->accountings->price ?? "['0']" }}"></accountings>
-                <div class="form-group col-12">
-                    <label for="comment">Заметки</label>
-                    <textarea name="accountings[comment]" class="form-control"
-                              id="comment">{{$product->accountings->comment ?? ""}}</textarea>
-                </div>
-                <multi-image-uploader name="accounting" class="mt-4"
-                                      :src="{{ json_encode($product->accountings->images_list) }}"></multi-image-uploader>
-                @if($product->accountings->hasMedia('uploads'))
+                    @if($product->accountings)
+                        <multi-image-uploader name="accounting" class="mt-4"
+                                              :src="{{  json_encode($product->accountings->images_list) }}"></multi-image-uploader>
+                    @else
+                        <multi-image-uploader name="accounting" class="mt-4"></multi-image-uploader>
+                    @endif
+                    @if($product->accountings && $product->accountings->hasMedia('uploads'))
+                        <div class="d-flex align-items-center mt-4">
+                            <a href="{{route('admin.accounting.pdf', $product)}}" class="btn btn-outline-primary">Скачать
+                                изображения</a>
+                        </div>
+                    @endif
                     <div class="d-flex align-items-center mt-4">
-                        <a href="{{route('admin.accounting.pdf', $product)}}" class="btn btn-outline-primary">Скачать изображения</a>
+                        <button class="btn btn-primary">Сохранить</button>
                     </div>
+                @else
+                    <p>Для ведения бухгалтерии сначала создайте:
+                        @if($suppliers->count() == 0)
+                            <a href="{{route('admin.suppliers.create')}}"
+                               class="btn btn-outline-primary">Поставщиков</a>
+                        @endif
+                        @if($statuses->count() == 0)
+                            <a href="{{route('admin.statuses.create')}}" class="btn btn-outline-primary">Cтатусы</a>
+                        @endif
+                    </p>
                 @endif
-                <div class="d-flex align-items-center mt-4">
-                    <button class="btn btn-primary">Сохранить</button>
-                </div>
-            @else
-                <p>Для ведения бухгалтерии сначала создайте:
-                    @if($suppliers->count() == 0)
-                        <a href="{{route('admin.suppliers.create')}}" class="btn btn-outline-primary">Поставщиков</a>
-                    @endif
-                    @if($statuses->count() == 0)
-                        <a href="{{route('admin.statuses.create')}}" class="btn btn-outline-primary">Cтатусы</a>
-                    @endif
-                </p>
             @endif
 
         </form>

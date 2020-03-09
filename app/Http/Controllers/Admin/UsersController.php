@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserSavingRequest;
+use App\Models\User\Role;
 use App\Models\User\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class UsersController extends Controller
@@ -30,6 +34,25 @@ class UsersController extends Controller
 	{
 		return \view('admin.users.show', compact('user'));
 	}
+	public function create():View
+    {
+        $roles = Role::get();
+        return \view('admin.users.create', compact('roles'));
+    }
+
+    /**
+     * @param UserSavingRequest $request
+     * @return RedirectResponse
+     */
+    public function store(UserSavingRequest $request): RedirectResponse
+    {
+        $attrs = $request->only('name', 'email', 'role_id');
+        $attrs['password'] = Hash::make($request->input('password'));
+
+        User::create($attrs);
+
+        return redirect()->route('admin.users.index');
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -39,29 +62,36 @@ class UsersController extends Controller
 	 */
 	public function edit(User $user)
 	{
-		//
+	    $roles = Role::get();
+        return view('admin.users.edit', compact('user', 'roles'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  \App\Models\User\User $user
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, User $user)
-	{
-		//
-	}
+    /**
+     * @param UserSavingRequest $request
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function update(UserSavingRequest $request, User $user): RedirectResponse
+    {
+        $user->fill($request->only('name', 'email', 'role_id'));
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\Models\User\User $user
-	 * @return \Illuminate\Http\Response
-	 */
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.users.index');
+    }
+
+    /**
+     * @param User $user
+     * @return RedirectResponse
+     * @throws \Exception
+     */
 	public function destroy(User $user)
 	{
-		//
+        $user->delete();
+        return redirect()->back();
 	}
 }

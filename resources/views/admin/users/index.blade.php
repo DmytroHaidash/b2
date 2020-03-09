@@ -3,16 +3,20 @@
 @section('content')
 
     <section id="content">
-        <h1 class="h3 mb-5">
-            Пользователи
-        </h1>
-
+        <div class="d-flex align-items-center mb-5">
+            <h1 class="h3 mb-0">Пользователи</h1>
+            <div class="ml-4">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                    Создать новго пользователя
+                </a>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr class="small">
                 <th width="20">#</th>
                 <th>Имя</th>
-                <th class="text-center">Профиль</th>
+                <th>Роль</th>
                 <th>Дата создания</th>
                 <th></th>
             </tr>
@@ -27,14 +31,17 @@
                             {{ $user->name }}
                         </a>
                     </td>
-                    <td class="text-center h4">
-                        <i class="i-{{ $user->profile ? 'thumbs-up' : 'close text-danger' }}"></i>
-                    </td>
+                    <td>{{$user->role->name == 'admin' ? 'Администратор' :
+                    ($user->role->name  == 'moderator' ? 'Модератор' : 'Пользователь')}}</td>
                     <td width="150">{{ $user->created_at->formatLocalized('%d %b %Y, %H:%M') }}</td>
-                    <td width="100">
+                    <td width="150">
                         <a href="{{ route('admin.users.show', $user) }}"
                            class="btn btn-warning btn-squire">
                             <i class="i-user"></i>
+                        </a>
+                        <a href="{{ route('admin.users.edit', $user) }}"
+                           class="btn btn-warning btn-squire">
+                            <i class="i-pencil"></i>
                         </a>
                         <button class="btn btn-danger btn-squire">
                             <i class="i-trash"></i>

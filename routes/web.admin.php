@@ -6,7 +6,7 @@ Route::group([
     'as' => 'admin.',
     'prefix' => 'admin',
     'namespace' => 'Admin',
-    'middleware' => ['auth', 'admin'],
+    'middleware' => ['auth', 'role:admin|moderator'],
 ], function () {
 
     Route::get('/', function () {
@@ -25,15 +25,15 @@ Route::group([
     Route::resource('suppliers', 'SuppliersController')->except(['show']);
     Route::resource('statuses', 'StatusesController')->except(['show']);
 
-    Route::get('accounting', 'AccountingsController@index')->name('accounting.index');
-    Route::get('accounting/{product}', 'AccountingsController@pdf')->name('accounting.pdf');
+    Route::get('accounting', 'AccountingsController@index')->name('accounting.index')->middleware('role:admin');
+    Route::get('accounting/{product}', 'AccountingsController@pdf')->name('accounting.pdf')->middleware('role:admin');
 
     Route::resource('categories', 'CategoriesController')->except(['show']);
     Route::post('categories/order/{category}/{direction}', 'CategoriesController@sortOrder')
         ->name('categories.sort');
     Route::resource('orders', 'OrdersController')->except(['create', 'destroy']);
 
-    Route::resource('users', 'UsersController')->except(['create', 'store']);
+    Route::resource('users', 'UsersController');
 
     Route::resource('slides', 'SlidesController')->except(['show']);
     Route::resource('settings', 'SettingsController')->only(['index', 'update']);

@@ -20,10 +20,10 @@
 
             <div class="form-group">
                 <label for="role">Роль</label>
-                <select name="role" id="role" class="form-control">
-                    @foreach(\App\Models\User\Role::$ROLES as $role)
-                        <option value="{{ $role }}">
-                            {{ __('admin.roles.'.strtolower($role)) }}
+                <select name="role_id" id="role" class="form-control">
+                    @foreach($roles as $role)
+                        <option value="{{ $role->id }}">
+                            {{$role->name == 'admin' ? 'Администратор' : ($role->name  == 'moderator' ? 'Модератор' : 'Пользователь')}}
                         </option>
                     @endforeach
                 </select>

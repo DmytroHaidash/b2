@@ -12,14 +12,14 @@ class UserRole
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @param string $role
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role)
     {
-		if (!Auth::user()->hasRole('admin')) {
-			return redirect()->route('app.home');
-		}
-
+        if (!Auth::user()->hasRole(explode('|', $role))) {
+            return redirect()->route('client.index');
+        }
         return $next($request);
     }
 }

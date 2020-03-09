@@ -134,7 +134,7 @@ class ProductsController extends Controller
      */
     public function update(ProductSavingRequest $request, Product $product): RedirectResponse
     {
-       /* dd($request->accounting);*/
+        /*dd($request->all());*/
         if ($request->has('regenerate')) {
             $product->slug = null;
         }
@@ -147,14 +147,14 @@ class ProductsController extends Controller
             'in_stock' => $request->has('in_stock')
         ]);
 
-        if ($request->has('media')) {
-            foreach ($request->media as $media) {
+        if ($request->has('images')) {
+            foreach ($request->images as $media) {
                 Media::find($media)->update([
                     'model_type' => Product::class,
                     'model_id' => $product->id,
                 ]);
             }
-            Media::setNewOrder($request->input('media'));
+            Media::setNewOrder($request->input('images'));
         }
 
         if ($request->has('accountings')) {
