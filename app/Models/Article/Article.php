@@ -93,12 +93,16 @@ class Article extends Model implements HasMedia
 
 	public function getPreviewAttribute(): string
 	{
-		return $this->getFirstMediaUrl('articles', 'preview');
+        return $this->hasMedia('articles')
+            ? $this->getFirstMedia('articles')->getFullUrl('preview')
+            : asset('images/no-image.png');
 	}
 
 	public function getBannerAttribute(): string
 	{
-		return $this->getFirstMediaUrl('articles', 'banner');
+        return $this->hasMedia('articles')
+            ? $this->getFirstMedia('articles')->getFullUrl('banner')
+            : asset('images/no-image.png');
 	}
 
 	/**
