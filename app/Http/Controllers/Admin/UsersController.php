@@ -20,7 +20,7 @@ class UsersController extends Controller
 	public function index(): View
 	{
 		return \view('admin.users.index', [
-			'users' => User::where('id', '!=', 1)->latest('id')->paginate(20),
+			'users' => User::latest('id')->paginate(20),
 		]);
 	}
 
