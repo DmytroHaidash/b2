@@ -6,19 +6,25 @@
     </a>
     {{-- <figure class="tabs-image d-none d-md-block lozad"
              data-background-image="{{ $articles->first()->banner }}"></figure>--}}
-    <div class="container mt-4">
-        <div class="row">
+    <div class="container-fluid mt-4">
+        <div class="row no-gutters categories">
             @foreach($articles as $article)
-                <div class="col-md-6 col-lg-4 ">
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <a href="{{ route('app.articles.show', $article) }}"
+                       class="category category--medium">
+                        <figure class="category__image mb-3 lozad"
+                                data-background-image="{{ $article->preview }}"></figure>
 
-                    <article class=" py-4 {{ $loop->index == 0 ? 'is-active' : '' }}"
+                        <h5 class="mb-0 text-center">{{ $article->translate('title') }}</h5>
+                    </a>
+                    {{--<article class=" py-4 {{ $loop->index == 0 ? 'is-active' : '' }}"
                              tabindex="{{ $loop->iteration }}" data-image="{{ $article->banner }}">
                         <h5 class="mb-2">{{ $article->translate('title') }}</h5>
                         <div class="tabs-item__description mb-1">{{ remove_tags($article->translate('body')) }}</div>
                         <a href="{{ route('app.articles.show', $article) }}" class="read-more">
                             @lang('pages.articles.readmore')
                         </a>
-                    </article>
+                    </article>--}}
                 </div>
             @endforeach
         </div>

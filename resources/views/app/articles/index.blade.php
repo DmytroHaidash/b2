@@ -27,13 +27,22 @@
                     </a>
                 </div>
             </div>
+        </div>
+        <div class="container-fluid">
 
             @includeIf('partials.app.articles.filters')
 
-            <div class="row">
+            <div class="row no-gutters categories">
                 @forelse($articles as $article)
-                    <div class="{{ $loop->index !== 0 ? 'col-md-6' : '' }} {{ in_array($loop->index, [0, 3]) ? 'col-lg-8' : 'col-lg-4' }}">
-                        <a href="{{ route('app.articles.show', $article) }}" class="article-preview no-shadow">
+                    <div class="col-md-4">
+                        <a href="{{ route('app.catalog.index', ['category' => $article->slug]) }}"
+                           class="category category--medium">
+                            <figure class="category__image mb-3 lozad"
+                                    data-background-image="{{ $article->preview }}"></figure>
+
+                            <h5 class="mb-0 text-center">{{ $article->translate('title') }}</h5>
+                        </a>
+                        {{--<a href="{{ route('app.articles.show', $article) }}" class="article-preview no-shadow">
                             <figure class="lozad article-preview__image{{ in_array($loop->index, [0, 1, 2, 3]) ? ' article-preview__image--large' : '' }}"
                                     data-background-image="{{ $article->preview }}"></figure>
 
@@ -48,7 +57,7 @@
                                     @lang('pages.articles.readmore')
                                 </span>
                             </div>
-                        </a>
+                        </a>--}}
                     </div>
                 @empty
                     <div class="col-sm text-center">
