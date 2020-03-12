@@ -93,7 +93,7 @@
                                 <i class="material-icons mr-2">chat</i>
                                 @lang('pages.product.question')
                             </button>
-                            @if(Auth::user()->hasRole('admin'))
+                            @if(Auth::user() && Auth::user()->hasRole('admin'))
                                 <a href="{{route('app.catalog.pdf', $product)}}"  download class="btn btn-primary h4 px-4 py-3 mb-0 ml-3">
                                     Скачать PDF
                                 </a>

@@ -134,7 +134,6 @@ class ProductsController extends Controller
      */
     public function update(ProductSavingRequest $request, Product $product): RedirectResponse
     {
-        /*dd($request->all());*/
         if ($request->has('regenerate')) {
             $product->slug = null;
         }
