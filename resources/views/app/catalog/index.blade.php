@@ -12,47 +12,51 @@
 
     <section id="content">
         <div class="container">
-           {{-- <div class="row">
-                <div class="col-md-4 col-lg-3">
-                    @include('partials.app.catalog.filters')
+            {{-- <div class="row">
+                 <div class="col-md-4 col-lg-3">
+                     @include('partials.app.catalog.filters')
+                 </div>
+
+                 <div class="col-md-8 col-lg-9">--}}
+            <div class="container mx-0">
+                <div class="flex align-items-center mb-5">
+                    <h1 class="mb-0 h3 text-center">{{ $page->translate('title') }}</h1>
+                    <div class="ml-5 flex-grow-1">
+                        <hr>
+                        @if ($page->hasTranslation('description'))
+                            <p>{{ $page->translate('description') }}</p>
+                        @endif
+                    </div>
                 </div>
 
-                <div class="col-md-8 col-lg-9">--}}
-                    <div class="container mx-0">
-                        <div class="d-flex align-items-center mb-5">
-                            <h1 class="mb-0 h3">{{ $page->translate('title') }}</h1>
-                            <div class="ml-5 flex-grow-1">
-                                <hr>
-                                @if ($page->hasTranslation('description'))
-                                    <p>{{ $page->translate('description') }}</p>
-                                @endif
-                            </div>
+                {{--@include('partials.app.catalog.search')--}}
+                @include('partials.app.catalog.filters')
+                <div class="row">
+                    @forelse($products as $product)
+                        <div class="col-md-6 col-lg-4">
+                            @include('partials.app.catalog.preview')
                         </div>
+                    @empty
+                        @lang('pages.catalog.not_found')
+                    @endforelse
+                </div>
 
-                        @include('partials.app.catalog.search')
-                        @include('partials.app.catalog.filters')
-                        <div class="row">
-                            @forelse($products as $product)
-                                <div class="col-md-6 col-lg-4">
-                                    @include('partials.app.catalog.preview')
-                                </div>
-                            @empty
-                                @lang('pages.catalog.not_found')
-                            @endforelse
-                        </div>
-
-                        <div class="d-flex mt-4">
-                            {{ $products->appends(request()->except('page'))->links() }}
-                            <div class="ml-auto">
-                                <a href="{{ route('app.catalog.all') }}" class="btn btn-primary ml-3">
-                                    <i class="material-icons mr-3">all_inclusive</i>
-                                    @lang('pages.catalog.all')
-                                </a>
-                            </div>
-                        </div>
+                <div class="d-flex mt-4">
+                    {{ $products->appends(request()->except('page'))->links() }}
+                    <div class="ml-auto">
+                        <a href="{{ route('app.catalog.index') }}" class="btn btn-primary ml-3">
+                            {{--<i class="material-icons mr-3">all_inclusive</i>--}}
+                            @if(request()->filled('category'))
+                                @lang('pages.catalog.filter.clear')
+                            @else
+                                @lang('pages.catalog.all')
+                            @endif
+                        </a>
                     </div>
-                {{--</div>
-            </div>--}}
+                </div>
+            </div>
+            {{--</div>
+        </div>--}}
         </div>
     </section>
 

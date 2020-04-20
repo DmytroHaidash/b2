@@ -25,7 +25,6 @@ class TagSavingRequest extends FormRequest
 	{
 		return [
 			'ru.title' => 'required',
-			'uk.title' => 'required',
 			'group_id' => 'required',
 		];
 	}

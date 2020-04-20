@@ -51,7 +51,7 @@ return [
 	'catalog' => [
 		'title' => 'Catalog',
 		'not_found' => 'Products not found.',
-		'all' => 'All',
+		'all' => 'Up',
 		'search' => [
 			'button' => 'Find',
 			'placeholder' => 'Search',

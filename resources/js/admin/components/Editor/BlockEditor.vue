@@ -38,7 +38,7 @@
         locales: JSON.parse(document.querySelector('[name="locales"]').content),
         langs: {
           ru: 'Русский',
-          //en: 'English',
+          en: 'English',
           uk: 'Украинский'
         }
       }

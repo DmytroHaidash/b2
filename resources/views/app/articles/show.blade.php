@@ -22,17 +22,6 @@
                     {!! $article->created_at->formatLocalized(app()->getLocale() == 'en' ? '%B <div class="date">%d</div> %Y' : '<div class="date">%d</div> <div>%B</div> %Y') !!}
                 </div>
             </div>
-
-            @auth
-                <div class="infobar-item">
-                    <div class="infobar-item__heading">@lang('common.favorites')</div>
-                    <div class="infobar-item__body">
-                        <i class="material-icons favorites-icon" onclick="togglefavorites()">
-                            {{ $article->in_favorites ? 'star' : 'star_border' }}
-                        </i>
-                    </div>
-                </div>
-            @endauth
         </div>
     </figure>
 

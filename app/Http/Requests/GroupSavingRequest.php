@@ -25,7 +25,6 @@ class GroupSavingRequest extends FormRequest
 	{
 		return [
 			'ru.title' => 'required',
-			'uk.title' => 'required',
 		];
 	}
 }

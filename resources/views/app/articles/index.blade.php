@@ -35,7 +35,7 @@
             <div class="row no-gutters categories">
                 @forelse($articles as $article)
                     <div class="col-md-4">
-                        <a href="{{ route('app.catalog.index', ['category' => $article->slug]) }}"
+                        <a href="{{ route('app.articles.show', $article) }}"
                            class="category category--medium">
                             <figure class="category__image mb-3 lozad"
                                     data-background-image="{{ $article->preview }}"></figure>

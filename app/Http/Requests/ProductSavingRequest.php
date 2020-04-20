@@ -25,7 +25,6 @@ class ProductSavingRequest extends FormRequest
 	{
 		return [
 			'ru.title' => 'required',
-            'uk.title' => 'required',
 			'price' => 'required',
 		];
 	}
