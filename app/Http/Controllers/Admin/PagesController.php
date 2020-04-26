@@ -38,6 +38,12 @@ class PagesController extends Controller
     {
         $page->updateTranslation();
 
+        if ($request->hasFile('image')) {
+            $page->addMediaFromRequest('image')
+                ->usingFileName(create_file_name($request->file('image')))
+                ->toMediaCollection('pages');
+        }
+
         return back();
     }
 }

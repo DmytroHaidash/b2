@@ -7,7 +7,10 @@
 @endsection
 
 @section('content')
-
+    @if($page->hasMedia('pages'))
+        <figure class="article-image lozad" data-background-image="{{ $page->getFirstMediaUrl('pages') }}">
+        </figure>
+    @endif
     <section id="content">
         <div class="container">
             {!! $page->body !!}
