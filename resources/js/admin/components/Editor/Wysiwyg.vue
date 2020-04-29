@@ -43,10 +43,17 @@
                             [{'list': 'ordered'}, {'list': 'bullet'}],
                             ['bold', 'italic', 'strike'],
                             [{script: 'sub'}, {script: 'super'}],
-                            ['link'],
+                            ['link', 'image', 'clean'],
                         ]
                     },
-                    placeholder: 'Описание'
+                    imageDrop: true,
+                    placeholder: 'Описание',
+                    uploadConfig: {
+                        action: '/admin/media/upload',
+                        res(res) {
+                            return res.image.link;
+                        }
+                    }
                 }
             }
         },

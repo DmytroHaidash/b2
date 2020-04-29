@@ -22,7 +22,7 @@ class SearchController extends Controller
 	{
 		$search = $request->input('q');
 
-		$products = Product::whereHas('translates', function ($q) use ($search) {
+		$products = Product::where('is_published', 1)->whereHas('translates', function ($q) use ($search) {
 			$this->handleQuery($q, $search);
 		})->get()->each(function ($i) {
 			$i->category = 'catalog';
