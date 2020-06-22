@@ -4,8 +4,27 @@
 
   a {
     color: currentColor;
+
     &:hover {
       color: $gold;
+    }
+  }
+}
+
+.footer-logo {
+  a {
+    figure {
+      width: 100px;
+      height: 42px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+
+
+      @media (min-width: map_get($grid-breakpoints, sm)) {
+        width: 160px;
+        height: 68px;
+      }
     }
   }
 }

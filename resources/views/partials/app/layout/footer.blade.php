@@ -7,9 +7,10 @@
                         {{--<use xlink:href="#helmet"></use>--}}
                     {{--</svg>--}}
                     {{--<br>--}}
-                    <svg width="160" height="160">
-                        <use xlink:href="#logo" fill="#fff"></use>
-                    </svg>
+                    <figure style="background-image: url(../images/logo-white.png)"></figure>
+                    {{--<svg width="160" height="160">--}}
+                        {{--<use xlink:href="#logo" fill="#fff"></use>--}}
+                    {{--</svg>--}}
                 </a>
             </div>
 
