@@ -1,5 +1,5 @@
 <a href="{{ url('/about') }}" class="appointment d-flex flex-column align-items-center justify-content-center"
-   style="background-image: url(../images/about.jpg)">
+   style="background-image: url(../images/about-2.jpg)">
     <h2 class="appointment__title">{{$about->title}}</h2>
 </a>
 <div class="container">
