@@ -6,7 +6,7 @@
     /*border-bottom: 1px solid rgba(#fff, .25);*/
     z-index: 999;
     padding: 0 20px;
-    background-color: rgba(#1d2024, 0.7);
+    background: linear-gradient(180deg,#1a202c,transparent);
 }
 
 .header-item {
@@ -151,6 +151,20 @@
     display: inline-block;
     svg {
         fill: #fff;
+    }
+
+    figure {
+        width: 60px;
+        height: 25px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+
+
+        @media (min-width: map_get($grid-breakpoints, sm)) {
+            width: 100px;
+            height: 42px;
+        }
     }
 }
 .nav-search-icon{
